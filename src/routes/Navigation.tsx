@@ -23,7 +23,7 @@ export const Navigation = () => {
             <img src={ logo } alt="React Logo" />
           <ul>
             {
-              routes.map( ({ to, path,namespace }) => (
+              routes.map( ({ path,namespace }) => (
                 <li key={ path }>
                   <NavLink to={ path } activeClassName="nav-active" exact>{ namespace }</NavLink>
                 </li>
