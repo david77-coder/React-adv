@@ -4,8 +4,16 @@ import { useContext } from "react";
 import noImage from "../assets/no-image.jpg";
 import { productContext } from "./ProductCard";
 
+
+export interface PropsImg {
+  img?: string, 
+  className?: string,
+  style?: React.CSSProperties
+}
+
+
 // img = "" esto va a hacer que la imagen sea opcional
-export const ProductImage = ({img = ''}) => {
+export const ProductImage = ({img, className, style}:PropsImg) => {
 
   const {product} = useContext(productContext);
   let imgShow: string;
@@ -18,6 +26,6 @@ export const ProductImage = ({img = ''}) => {
     imgShow = noImage;  
   }
   return (
-    <img className={styles.productImg} src={imgShow} alt="Product Image" />
+    <img style={style} className={`${styles.productImg} ${className}`} src={imgShow} alt="Product Image"  />
   )
 } 

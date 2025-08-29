@@ -5,7 +5,7 @@ import { ProductCard as ProductCardHoc} from './ProductCard';
 import { ProductImage } from './ProductImage';
 import { ProducTitle } from './ProductItle';
 
-;  
+import {ProductCardHOCProps} from '../interfaces/interfaces';
 
 // export const ProductCard ={
 //     ...ProductCardHoc,
@@ -14,7 +14,7 @@ import { ProducTitle } from './ProductItle';
 //     Buttons: ProductButtons
 // }
 
-export const ProductCard:ProductCardHOCMain = Object.assign( ProductCardHoc, {
+export const ProductCard:ProductCardHOCProps = Object.assign( ProductCardHoc, {
     Image: ProductImage,    
     Title: ProducTitle,
     Buttons: ProductButtons

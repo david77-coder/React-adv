@@ -5,8 +5,7 @@ import { ProductImage } from '../components/ProductImage';
 import { ProducTitle } from '../components/ProductItle';
 import { ProductButtons } from '../components/ProductButtons';
 import ProductCard from '../components/index';
-
-
+import '../styles/custom-styles.css';
 
 const product = {
   id: '1',
@@ -15,13 +14,13 @@ const product = {
 }
 
 
+
 export const ShoppingPage = () => {
 
   return (
-    <div>
+    <div className='bg-dark'>
         <h1>Shopping store</h1>
         <hr />
-
         <div style={{
             display: 'flex',
             flexDirection: 'row',
@@ -29,18 +28,31 @@ export const ShoppingPage = () => {
             gap: '20px'
         }}>
 
-      <ProductCard product={product}>
-          <ProductCard.Image />
-          <ProductCard.Title />
-          <ProductCard.Buttons />
+      <ProductCard product={product} className="bg-dark text-white ">
+          <ProductCard.Image className={"custom-img"}  />
+          <ProductCard.Title className={"text-bold"}  />
+          <ProductCard.Buttons className="custom-buttons" 
+            />
       </ProductCard>
 
-        <ProductCard product={product}>
-          <ProductImage  />
-          <ProducTitle title={ "cafe con la leche"} />
-          <ProductButtons />
+
+        <ProductCard product={product}  className="bg-dark text-white ">
+          <ProductImage className={"custom-img"}  />
+          <ProducTitle title={ "cafe con la leche"} className={"text-bold"} />
+          <ProductButtons className="custom-buttons" style={ { backgroundColor: 'green'} } />
         </ProductCard>
-   
+
+
+         <ProductCard 
+         product={product}  
+         className='bg-dark text-white'
+         style={ { color: 'red'} }
+          >
+          <ProductImage style={{border: '2px solid red'}}/>
+          <ProducTitle   />
+          <ProductButtons  />
+        </ProductCard>
+        
         </div>
     </div>
   )
