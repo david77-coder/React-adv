@@ -5,6 +5,7 @@ import styles from "../styles/styles.module.css";
 export interface Props {
   title? :string,
   className?: string,
+  numero?: number,
   style?: React.CSSProperties
 
 } 
