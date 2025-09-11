@@ -1,8 +1,9 @@
 import styles from "../styles/styles.module.css";
-import { onChangeArgs, Product, ProductContextProps } from "../interfaces/interfaces";
+import { InicialValues, onChangeArgs, Product, ProductCardHanlers, ProductContextProps } from '../interfaces/interfaces';
 
-import {createContext, ReactElement} from "react";
+import {createContext} from "react";
 import useProducts from "../hooks/useProducts";
+
 
 
 
@@ -12,17 +13,18 @@ export const productContext = createContext<ProductContextProps>({
   counter: 0,
   increaseBy: () => {},
   product: {id: '', title: ''},
-
 });
 const { Provider } = productContext;  
 
 export interface Props {
   product: Product, 
-  children?: ReactElement | ReactElement[],
+  // children?: ReactElement | ReactElement[],
+  children: (args:ProductCardHanlers) => JSX.Element,
   className?: string,
   style?: React.CSSProperties,
   onChange?: (args:onChangeArgs) => void,
-  value?: number
+  value?: number,
+  initialValues?: InicialValues
 }
 
 // export interface onChangeArgs{
@@ -30,17 +32,27 @@ export interface Props {
 //   count: number
 // }
 
-export const ProductCard = ( {children, product, className, style, onChange, value}: Props) => {
-  const {counter, increaseBy} = useProducts({onChange, product, value});
+export const ProductCard = ( {children, product, className, style, onChange, value, initialValues}: Props) => {
+  //useProducts es quien maneja el estado
+  const {counter, increaseBy, maxCount, reset, isMaxCountReached} = useProducts({onChange, product, value, initialValues});
    
   return (
       <Provider value={{
         counter,
         increaseBy,
-        product
+        product,
+        maxCount
       }}>
           <div className={`${styles.productCard} ${className}`} style={style}>
-            {children }
+            { 
+            children({
+              count: counter,
+              isMaxCountReached:isMaxCountReached,
+              maxCount: initialValues?.maxCount,
+              product: product,
+              increaseBy:increaseBy,
+              reset,
+            }) }
             {/* <img className={styles.productImg} src="./coffee-mug.png" alt="Cofee" /> */}
             {/* <ProductImage img = {product.img} />
             <ProducTitle title={product.title} />
